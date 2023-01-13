@@ -29,8 +29,9 @@ class GettingEmployeeMasterEvent extends EmployeeEvent{
  }
 
  class DeleteEmployeeEvent extends EmployeeEvent {
-  String? empCode;
-  DeleteEmployeeEvent(this.empCode);
+  int? empCode;
+  List? employeeList;
+  DeleteEmployeeEvent(this.empCode, this. employeeList);
 
   @override
   List<Object?> get props => [];

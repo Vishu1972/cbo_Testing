@@ -41,7 +41,11 @@ class _EmployeeListState extends State<EmployeeList> {
       ),
       body: SingleChildScrollView(
         child: BlocConsumer<EmployeeBloc, EmployeeState>(
-          listener: (context, state) {},
+          listener: (context, state) {
+            if(state is EmployeeDeleteSuccessState) {
+              BlocProvider.of<EmployeeBloc>(context).add(GettingEmployeeMasterEvent());
+            }
+          },
           builder: (context, state) {
             if(state is GetEmployeeMasterState) {
               employeeList = state.employeeList!;
@@ -73,9 +77,7 @@ class _EmployeeListState extends State<EmployeeList> {
                             ),
                                   GestureDetector(
                                     onTap: (){
-                                      var empCode = employeeCodeController.text;
-
-                                      BlocProvider.of<EmployeeBloc>(context).add(DeleteEmployeeEvent(empCode));
+                                      BlocProvider.of<EmployeeBloc>(context).add(DeleteEmployeeEvent(employeeList[index]['empCode'], employeeList));
                                     },
                                     child: Container(
                                         alignment: Alignment.topRight,
@@ -98,8 +100,8 @@ class _EmployeeListState extends State<EmployeeList> {
                               Container(
                                 margin: EdgeInsets.all(8),
                                 alignment: Alignment.topLeft,
-                                child: 
-                                
+                                child:
+
                                 Text("EMPDOJ :- ${employeeList[index]['dateofjoining']}"),
                               ),
                               Container(
@@ -108,7 +110,7 @@ class _EmployeeListState extends State<EmployeeList> {
                                 child: Text("EMPDOB :- ${employeeList[index]['empDOB']}"),
                               ),
 
-                            
+
                             ],
                           ),
                         );

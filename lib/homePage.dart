@@ -445,9 +445,15 @@ keyboardType: TextInputType.number,
                        // ),
                        GestureDetector(
                          onTap: (){
-                           setState(() {
-                             CircularProgressIndicator();
-                           });
+                           Navigator.push(
+                               context,
+                               MaterialPageRoute(
+                                   builder: (context)=>BlocProvider(
+                                     create: (_)=> EmployeeBloc(),
+                                     child: EmployeeList(),
+                                   )
+                               )
+                           );
                          },
                          child: Container(
                              margin: EdgeInsets.only(right: 6),
@@ -458,7 +464,7 @@ keyboardType: TextInputType.number,
                              ),
                              child: Padding(
                                padding: const EdgeInsets.all(8.0),
-                               child: Text("Load ",
+                               child: Text("Employee List",
                                  style: TextStyle(fontSize: 18),),
                              )),
                        ),

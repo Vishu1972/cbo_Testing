@@ -58,10 +58,12 @@ class EmployeeBloc extends Bloc<EmployeeEvent, EmployeeState> {
   void  _onDeleteEmployee(DeleteEmployeeEvent event, emit) async {
     DatabaseHelper dbHelper = DatabaseHelper.instance;
 
+
     var result = await dbHelper.deleteEmployeeRecord(event.empCode);
 
     if(result != null) {
-      emit(GetEmployeeMasterState(result.toList()));
+      event.employeeList!.removeWhere((element) => element['empCode'] == event.empCode );
+      emit(EmployeeDeleteSuccessState(event.employeeList));
     } else{
       emit(GetEmployeeMasterErrorState(null));
     }

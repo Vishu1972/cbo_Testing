@@ -26,6 +26,15 @@ class EmployeeInsertSuccessState extends EmployeeState {
   List<Object?> get props => [];
 }
 
+class EmployeeDeleteSuccessState extends EmployeeState {
+  List? employeeList;
+  EmployeeDeleteSuccessState(this. employeeList);
+
+  @override
+  List<Object?> get props => [];
+}
+
+
 class GetEmployeeMasterErrorState extends EmployeeState{
   final String? error;
   GetEmployeeMasterErrorState(this.error);
